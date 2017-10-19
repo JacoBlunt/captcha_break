@@ -1,0 +1,134 @@
+ CREATE DATABASE `wordpress` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci; 
+ grant all privileges on wordpress.* to wordpress@localhost identified by 'OMfVNcB7ADDjr3qaYe4o';
+ update user set password=PASSWORD("qpyS3i4aRK8YE1LBTHR7") where User='root';
+
+29566  FWPal5s5pGXx
+
+edit user [user1]
+### new user info 
+    user : user1
+    port : 443
+    method : aes-256-ctr
+    passwd : +NSBldX.K4-X(fM1
+    protocol : auth_sha1_v4-->auth_aes128_md5
+    obfs : tls1.2_ticket_auth
+    transfer_enable : 999999999999.0  G Bytes
+    u : 0
+    d : 0
+    ssr://67.216.193.34:443:auth_sha1_v4:aes-256-ctr:tls1.2_ticket_auth:K05TQmxkWC5LNC1YKGZNMQ
+    ssr://NjcuMjE2LjE5My4zNDo0NDM6YXV0aF9zaGExX3Y0OmFlcy0yNTYtY3RyOnRsczEuMl90aWNrZXRfYXV0aDpLMDVUUW14a1dDNUxOQzFZS0daTk1R
+端口号为 443 的用户密码已设置成 +NSBldX.K4-X(fM1
+
+edit user [user2]
+### new user info 
+    user : user2
+    port : 8443
+    method : aes-128-ctr
+    passwd : JE3z#LQbyH7-K(n-
+    protocol : auth_aes128_md5-->auth_chain_a
+    obfs : tls1.2_ticket_auth
+    transfer_enable : 9999999999.0  G Bytes
+    u : 0
+    d : 0
+    ssr://67.216.193.34:8443:auth_aes128_md5:aes-128-ctr:tls1.2_ticket_auth:SkUzeiNMUWJ5SDctSyhuLQ
+    ssr://NjcuMjE2LjE5My4zNDo4NDQzOmF1dGhfYWVzMTI4X21kNTphZXMtMTI4LWN0cjp0bHMxLjJfdGlja2V0X2F1dGg6U2tVemVpTk1VV0o1U0RjdFN5aHVMUQ
+端口号为 8443 的用户密码已设置成 JE3z#LQbyH7-K(n-
+
+
+可使用的客户端配置文件为:
+{
+  "localaddr": ":443",
+  "remoteaddr": "67.216.193.34:39990",
+  "key": "vvfast",
+  "crypt": "aes-128",
+  "mode": "fast",
+  "mtu": 1350,
+  "sndwnd": 512,
+  "rcvwnd": 512,
+  "datashard": 10,
+  "parityshard": 3,
+  "dscp": 0,
+  "nocomp": false
+}
+--crypt aes-128 --sndwnd 512 --rcvwnd 512
+手机端参数可以使用:
+  key=vvfast;crypt=aes-128;mode=fast;mtu=1350;sndwnd=512;rcvwnd=512;datashard=10;parityshard=3;dscp=0
+
+可使用的客户端配置文件为:
+{
+  "localaddr": ":8443",
+  "remoteaddr": "67.216.193.34:49990",
+  "key": "vvvfast",
+  "crypt": "aes",
+  "mode": "fast",
+  "mtu": 1350,
+  "sndwnd": 512,
+  "rcvwnd": 512,
+  "datashard": 10,
+  "parityshard": 3,
+  "dscp": 0,
+  "nocomp": false
+}
+--sndwnd 512 --rcvwnd 512
+
+手机端参数可以使用:
+  key=vvvfast;crypt=aes;mode=fast;mtu=1350;sndwnd=512;rcvwnd=512;datashard=10;parityshard=3;dscp=0
+
+#!/bin/sh
+cd ~/wordpress_content/
+rm -rf ./*
+wget https://jacozy.wordpress.com/
+rm -rf /usr/share/nginx/html/*
+cp ./index.html /usr/share/nginx/html/
+
+
+
+  "redirect": ["*:80#127.0.0.1:3333","*:443#127.0.0.1:3333","*:8443#127.0.0.1:3333"],
+
+用户添加成功！用户信息如下：
+### add user info 
+    user : user3
+    port : 80
+    method : aes-256-cfb
+    passwd : m7kk26acgW4aMxVQU3NB
+    protocol : auth_aes128_md5
+    obfs : http_simple
+    transfer_enable : 999999999999.0  G Bytes
+    u : 0
+    d : 0
+    ssr://67.216.193.34:80:auth_aes128_md5:aes-256-cfb:http_simple:bTdrazI2YWNnVzRhTXhWUVUzTkI
+    ssr://NjcuMjE2LjE5My4zNDo4MDphdXRoX2FlczEyOF9tZDU6YWVzLTI1Ni1jZmI6aHR0cF9zaW1wbGU6YlRkcmF6STJZV05uVnpSaFRYaFdVVlV6VGtJ
+ShadowsocksR服务器已启动
+
+
+可使用的客户端配置文件为:
+{
+  "localaddr": ":80",
+  "remoteaddr": "67.216.193.34:59990",
+  "key": "vvvfast",
+  "crypt": "aes",
+  "mode": "fast",
+  "mtu": 1350,
+  "sndwnd": 512,
+  "rcvwnd": 512,
+  "datashard": 10,
+  "parityshard": 3,
+  "dscp": 0,
+  "nocomp": false
+}
+--sndwnd 512 --rcvwnd 512
+
+手机端参数可以使用:
+  key=vvvfast;crypt=aes;mode=fast;mtu=1350;sndwnd=512;rcvwnd=512;datashard=10;parityshard=3;dscp=0
+
+051202077934-820829
+30 23 * * * service nginx restart
+55 23 * * * ~/getwp.sh
+
+
+free.ngrok.cc  
+11956
+
+1.cloud shell
+2.gcloud config set core/project keras-crack
+3.
