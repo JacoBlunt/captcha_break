@@ -37,9 +37,9 @@ startTime = time.time()
 for j,x in enumerate(range(1600)):
     X, y = next(gen())
     tmpEndTime=time.time()
-    print(" %s times total cost %s s!" %(j,(tmpEndTime.timestamp()-startTime.timestamp()))) 
+    print(" %s times total cost %s s!" %(j,(tmpEndTime-startTime))) 
 endTime=time.time()
-print("cost time:%s ms" % (endTime.timestamp()-startTime.timestamp()))
+print("cost time:%s ms" % (endTime-startTime))
 # plt.imshow(X[0])
 # plt.title(decode(y))
 
