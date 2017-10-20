@@ -10,7 +10,7 @@ import os
 def getSubDirs(rootDir): 
     return [d for d in os.listdir(rootDir)]
 
-width, height,batchSize, n_len, n_class = 200, 50,1001, 5, len(characters)
+width, height,batchSize, n_len, n_class = 200, 50,1000, 5, len(characters)
 pic_pre_path='./pic_src/'
 dirList = getSubDirs(pic_pre_path)
 
@@ -30,7 +30,7 @@ def gen(batch_size=batchSize):
     generator = ImageCaptcha(width=width, height=height)
     while True:
         for i in range(batch_size):
-            random_str = ''.join([random.choice(characters) for j in range(4)])
+            random_str = ''.join([random.choice(characters) for j in range(n_len)])
             X[i] = generator.generate_image(random_str)
             for j, ch in enumerate(random_str):
                 y[j][i, :] = 0

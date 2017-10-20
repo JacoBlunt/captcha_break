@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from captcha.image import ImageCaptcha
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 import random
 
@@ -13,7 +13,7 @@ print(characters)
 
 width, height, n_len, n_class = 170, 80, 4, len(characters)
 
-from keras.utils.np_utils import to_categorical
+# from keras.utils.np_utils import to_categorical
 
 def gen(batch_size=32):
     X = np.zeros((batch_size, height, width, 3), dtype=np.uint8)
@@ -28,52 +28,59 @@ def gen(batch_size=32):
                 y[j][i, characters.find(ch)] = 1
         yield X, y
 
-def decode(y):
-    y = np.argmax(np.array(y), axis=2)[:,0]
-    return ''.join([characters[x] for x in y])
+# def decode(y):
+#     y = np.argmax(np.array(y), axis=2)[:,0]
+#     return ''.join([characters[x] for x in y])
 
-X, y = next(gen(1))
-plt.imshow(X[0])
-plt.title(decode(y))
+from datetime import datetime
+startTime = datetime.now()
+for j,x in enumerate(range(1600)):
+    X, y = next(gen())
+    tmpEndTime=datetime.now()
+    print(" %s times total cost %s s!" %(j,(tmpEndTime.timestamp()-startTime.timestamp()))) 
+endTime=datetime.now()
+print("cost time:%s ms" % (endTime.timestamp()-startTime.timestamp()))
+# plt.imshow(X[0])
+# plt.title(decode(y))
 
-from keras.models import *
-from keras.layers import *
+# from keras.models import *
+# from keras.layers import *
 
-input_tensor = Input((height, width, 3))
-x = input_tensor
-for i in range(4):
-    x = Convolution2D(32*2**i, 3, 3, activation='relu')(x)
-    x = Convolution2D(32*2**i, 3, 3, activation='relu')(x)
-    x = MaxPooling2D((2, 2))(x)
+# input_tensor = Input((height, width, 3))
+# x = input_tensor
+# for i in range(4):
+#     x = Convolution2D(32*2**i, 3, 3, activation='relu')(x)
+#     x = Convolution2D(32*2**i, 3, 3, activation='relu')(x)
+#     x = MaxPooling2D((2, 2))(x)
 
-x = Flatten()(x)
-x = Dropout(0.25)(x)
-x = [Dense(n_class, activation='softmax', name='c%d'%(i+1))(x) for i in range(4)]
-model = Model(input=input_tensor, output=x)
+# x = Flatten()(x)
+# x = Dropout(0.25)(x)
+# x = [Dense(n_class, activation='softmax', name='c%d'%(i+1))(x) for i in range(4)]
+# model = Model(input=input_tensor, output=x)
 
-model.compile(loss='categorical_crossentropy',
-              optimizer='adadelta',
-              metrics=['accuracy'])
+# model.compile(loss='categorical_crossentropy',
+#               optimizer='adadelta',
+#               metrics=['accuracy'])
 
-model.fit_generator(gen(), samples_per_epoch=51200, nb_epoch=5,
-                    validation_data=gen(), nb_val_samples=1280)
+# model.fit_generator(gen(), samples_per_epoch=51200, nb_epoch=5,
+#                     validation_data=gen(), nb_val_samples=1280)
 
-X, y = next(gen(1))
-y_pred = model.predict(X)
-plt.title('real: %s\npred:%s'%(decode(y), decode(y_pred)))
-plt.imshow(X[0], cmap='gray')
-plt.axis('off')
+# X, y = next(gen(1))
+# y_pred = model.predict(X)
+# plt.title('real: %s\npred:%s'%(decode(y), decode(y_pred)))
+# plt.imshow(X[0], cmap='gray')
+# plt.axis('off')
 
-from tqdm import tqdm
-def evaluate(model, batch_num=20):
-    batch_acc = 0
-    generator = gen()
-    for i in tqdm(range(batch_num)):
-        X, y = generator.next()
-        y_pred = model.predict(X)
-        batch_acc += np.mean(map(np.array_equal, np.argmax(y, axis=2).T, np.argmax(y_pred, axis=2).T))
-    return batch_acc / batch_num
+# from tqdm import tqdm
+# def evaluate(model, batch_num=20):
+#     batch_acc = 0
+#     generator = gen()
+#     for i in tqdm(range(batch_num)):
+#         X, y = generator.next()
+#         y_pred = model.predict(X)
+#         batch_acc += np.mean(map(np.array_equal, np.argmax(y, axis=2).T, np.argmax(y_pred, axis=2).T))
+#     return batch_acc / batch_num
 
-evaluate(model)
+# evaluate(model)
 
-model.save('cnn.h5')
+# model.save('cnn.h5')

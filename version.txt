@@ -131,4 +131,4 @@ free.ngrok.cc
 
 1.cloud shell
 2.gcloud config set core/project keras-crack
-3.
+3.gcloud compute scp E:/git_work/captcha_break/pic_src.zip xhplus@keras-1:/home/xhplus/keras/
