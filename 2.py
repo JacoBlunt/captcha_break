@@ -32,13 +32,13 @@ def gen(batch_size=32):
 #     y = np.argmax(np.array(y), axis=2)[:,0]
 #     return ''.join([characters[x] for x in y])
 
-from datetime import datetime
-startTime = datetime.now()
+import time
+startTime = time.time()
 for j,x in enumerate(range(1600)):
     X, y = next(gen())
-    tmpEndTime=datetime.now()
+    tmpEndTime=time.time()
     print(" %s times total cost %s s!" %(j,(tmpEndTime.timestamp()-startTime.timestamp()))) 
-endTime=datetime.now()
+endTime=time.time()
 print("cost time:%s ms" % (endTime.timestamp()-startTime.timestamp()))
 # plt.imshow(X[0])
 # plt.title(decode(y))
