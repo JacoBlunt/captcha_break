@@ -1,16 +1,18 @@
 from captcha.image import ImageCaptcha
 #import matplotlib.pyplot as plt
 import numpy as np
-import random
-
+# import random
 import string
+# characters = string.digits + string.ascii_uppercase+string.ascii_lowercase
+# print(characters)
 
-characters = string.digits + string.ascii_uppercase+string.ascii_lowercase
-print(characters)
+import os 
+def getSubDirs(rootDir): 
+    return [d for d in os.listdir(rootDir)]
 
 width, height,batchSize, n_len, n_class = 200, 50,1001, 5, len(characters)
-pic_pre_path='E:\\git_work\\captcha_break\\pic_src\\'
-dirArray = np.zeros(batchSize)
+pic_pre_path='./pic_src/'
+dirList = getSubDirs(pic_pre_path)
 
 import matplotlib.image as mpimg
 def readPicFromHDD(os_path=pic_pre_path):

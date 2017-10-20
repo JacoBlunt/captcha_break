@@ -33,8 +33,8 @@ def decode(y):
     return ''.join([characters[x] for x in y])
 
 X, y = next(gen(1))
-plt.imshow(X[0])
-plt.title(decode(y))
+# plt.imshow(X[0])
+# plt.title(decode(y))
 
 from keras.models import *
 from keras.layers import *
@@ -60,8 +60,8 @@ model.fit_generator(gen(), samples_per_epoch=51200, nb_epoch=5,
 
 X, y = next(gen(1))
 y_pred = model.predict(X)
-plt.title('real: %s\npred:%s'%(decode(y), decode(y_pred)))
-plt.imshow(X[0], cmap='gray')
+# plt.title('real: %s\npred:%s'%(decode(y), decode(y_pred)))
+# plt.imshow(X[0], cmap='gray')
 plt.axis('off')
 
 from tqdm import tqdm
